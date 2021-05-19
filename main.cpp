@@ -61,12 +61,16 @@ int main() {
 			    break;
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym) {
-				case SDLK_UP:    vectorChain.changeMagnitude(5);		break;
-				case SDLK_DOWN:  vectorChain.changeMagnitude(-5);		break;
-				case SDLK_LEFT:  vectorChain.changeDirection(-M_PI/10); break;
-				case SDLK_RIGHT: vectorChain.changeDirection(M_PI/10);	break;
-				case SDLK_SPACE: vectorChain.selectNext();				break;
-				case SDLK_c: 	 vectorChain.addVector();				break;
+				case SDLK_UP:    if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.changeMagnitude(5);		break;
+				case SDLK_DOWN:  if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.changeMagnitude(-5);		break;
+				case SDLK_LEFT:  if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.changeDirection(-M_PI/10);break;
+				case SDLK_RIGHT: if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.changeDirection(M_PI/10);	break;
+				case SDLK_SPACE: if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.selectNext();				break;
+				case SDLK_c: 	 if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.addVector();				break;
+				case SDLK_d: 	 if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.removeVector();			break;
+				case SDLK_v: 	 if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.changeAngularVelocity(-M_PI/10);	break;
+				case SDLK_b: 	 if(vectorChain.running) vectorChain.stopRunning(pathBuffer); vectorChain.changeAngularVelocity(M_PI/10);	break;
+				case SDLK_r: 	 vectorChain.startRunning();	break;
 				}
 				break;
 			}

@@ -13,18 +13,25 @@ class VectorChain {
 		int posX, posY;
 		size_t selected;
 		float time;
-		bool running;
-
+		
 	public:
+		bool running;
+	
 		VectorChain(int x, int y);
 		
 		void update(SDL_Renderer *renderer, float frameTime, uint8_t pathBuffer[SCREEN_HEIGHT][SCREEN_WIDTH]);
 		
 		void selectNext();
+		
 		void addVector();
+		void removeVector();
 		
 		void changeDirection(float dir);
+		void changeAngularVelocity(float vel);
 		void changeMagnitude(float magnitude);
+
+		void startRunning();
+		void stopRunning(uint8_t pathBuffer[SCREEN_HEIGHT][SCREEN_WIDTH]);
 };
 
 #endif
