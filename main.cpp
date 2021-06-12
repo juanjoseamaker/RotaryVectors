@@ -29,7 +29,7 @@ int main() {
         return -1;
     }
 
-    SDL_Window *window = SDL_CreateWindow("Ray Casting",
+    SDL_Window *window = SDL_CreateWindow("Rotatory Vectors",
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
                                           SCREEN_WIDTH,
