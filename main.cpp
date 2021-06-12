@@ -1,10 +1,13 @@
+#include "vector.hpp"
+
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
-#define SCREEN_WIDTH  800
-#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH  600
+#define SCREEN_HEIGHT 600
 
 int main() {
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -33,6 +36,10 @@ int main() {
         return -1;
     }
 
+    Vector2 mainVector1(50, 0, 2 * M_PI);
+    Vector2 mainVector2(50, 0, M_PI);
+    float time = 0;
+
     bool running = true;
     
     while(running) {
@@ -57,7 +64,11 @@ int main() {
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
 		SDL_RenderClear(renderer);
 
-		// Game Loop
+		// Loop
+		int x = SCREEN_WIDTH/2, y = SCREEN_HEIGHT/2;
+		mainVector1.draw(renderer, x, y, time, 255, 0, 0);
+		mainVector2.draw(renderer, x, y, time, 255, 0, 0);
+		time += 0.05;
 		
         SDL_RenderPresent(renderer);
         
