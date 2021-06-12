@@ -3,11 +3,24 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
 using namespace std;
 
 #define SCREEN_WIDTH  600
 #define SCREEN_HEIGHT 600
+
+static uint8_t pathBuffer[SCREEN_HEIGHT][SCREEN_WIDTH] = {{0}};
+
+void copyPathBuffer(SDL_Renderer *renderer) {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0);
+	for(int y = 0; y < SCREEN_HEIGHT; y++) {
+		for(int x = 0; x < SCREEN_WIDTH; x++) {
+			if(pathBuffer[y][x])
+				SDL_RenderDrawPoint(renderer, x, y);
+		}
+	}
+}
 
 int main() {
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -68,10 +81,12 @@ int main() {
 		int x = SCREEN_WIDTH/2, y = SCREEN_HEIGHT/2;
 		mainVector1.draw(renderer, x, y, time, 255, 0, 0);
 		mainVector2.draw(renderer, x, y, time, 255, 0, 0);
-		time += 0.05;
-		
+		pathBuffer[y][x] = 1;
+		time += 0.025;
+
+		copyPathBuffer(renderer);
         SDL_RenderPresent(renderer);
         
-        SDL_Delay(50);
+        SDL_Delay(25);
     }
 }
