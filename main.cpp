@@ -49,8 +49,9 @@ int main() {
         return -1;
     }
 
-    Vector2 mainVector1(50, 0, 2 * M_PI);
-    Vector2 mainVector2(50, 0, M_PI);
+    Vector2 mainVector1(50, 0, -2 * M_PI);
+    Vector2 mainVector2(50, 0, -M_PI);
+    Vector2 mainVector3(50, M_PI/2, -4 * M_PI);
     float time = 0;
 
     bool running = true;
@@ -81,12 +82,13 @@ int main() {
 		int x = SCREEN_WIDTH/2, y = SCREEN_HEIGHT/2;
 		mainVector1.draw(renderer, x, y, time, 255, 0, 0);
 		mainVector2.draw(renderer, x, y, time, 255, 0, 0);
+		mainVector3.draw(renderer, x, y, time, 255, 0, 0);
 		pathBuffer[y][x] = 1;
-		time += 0.025;
+		time += 0.01;
 
 		copyPathBuffer(renderer);
         SDL_RenderPresent(renderer);
         
-        SDL_Delay(25);
+        SDL_Delay(10);
     }
 }
