@@ -3,13 +3,15 @@
 
 #include <SDL2/SDL.h>
 
+#define SCREEN_WIDTH  600
+#define SCREEN_HEIGHT 600
+
 class Vector2 {
-    private:
+    public:
         float magnitude;
         float angle;
         float angularVelocity;
 
-    public:
         Vector2(float _magnitude, float _angle, float _angularVelocity);
         void draw(SDL_Renderer *renderer, int &x, int &y, float time, Uint8 r, Uint8 g, Uint8 b);
 };

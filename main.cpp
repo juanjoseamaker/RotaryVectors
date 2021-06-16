@@ -1,4 +1,5 @@
 #include "vector.hpp"
+#include "vector_chain.hpp"
 
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -6,9 +7,6 @@
 #include <cstdint>
 
 using namespace std;
-
-#define SCREEN_WIDTH  600
-#define SCREEN_HEIGHT 600
 
 static uint8_t pathBuffer[SCREEN_HEIGHT][SCREEN_WIDTH] = {{0}};
 
@@ -49,10 +47,7 @@ int main() {
         return -1;
     }
 
-    Vector2 mainVector1(50, 0, -2 * M_PI);
-    Vector2 mainVector2(50, 0, -M_PI);
-    Vector2 mainVector3(50, M_PI/2, -4 * M_PI);
-    float time = 0;
+    VectorChain vectorChain(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 
     bool running = true;
     
@@ -66,10 +61,12 @@ int main() {
 			    break;
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym) {
-				case SDLK_UP:    break;
-				case SDLK_DOWN:  break;
-				case SDLK_LEFT:  break;
-				case SDLK_RIGHT: break;
+				case SDLK_UP:    vectorChain.changeMagnitude(5);		break;
+				case SDLK_DOWN:  vectorChain.changeMagnitude(-5);		break;
+				case SDLK_LEFT:  vectorChain.changeDirection(-M_PI/10); break;
+				case SDLK_RIGHT: vectorChain.changeDirection(M_PI/10);	break;
+				case SDLK_SPACE: vectorChain.selectNext();				break;
+				case SDLK_c: 	 vectorChain.addVector();				break;
 				}
 				break;
 			}
@@ -79,12 +76,7 @@ int main() {
 		SDL_RenderClear(renderer);
 
 		// Loop
-		int x = SCREEN_WIDTH/2, y = SCREEN_HEIGHT/2;
-		mainVector1.draw(renderer, x, y, time, 255, 0, 0);
-		mainVector2.draw(renderer, x, y, time, 255, 0, 0);
-		mainVector3.draw(renderer, x, y, time, 255, 0, 0);
-		pathBuffer[y][x] = 1;
-		time += 0.01;
+		vectorChain.update(renderer, 0.01, pathBuffer);
 
 		copyPathBuffer(renderer);
         SDL_RenderPresent(renderer);
