@@ -54,7 +54,7 @@ void VectorChain::update(SDL_Renderer *renderer, float frameTime, uint8_t pathBu
 
 		for(size_t i = 0; i < vectorChain.size(); i++) {
 			if(selected == i) {
-				float angularVelocityMagnitude = abs(vectorChain[i].angle - vectorChain[i].angularVelocity) * 5;
+				float angularVelocityMagnitude = abs(vectorChain[i].angularVelocity) * 5;
 				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0);
 				SDL_RenderDrawLine(renderer, x, y, x + angularVelocityMagnitude * cos(vectorChain[i].angle + vectorChain[i].angularVelocity),
 					y + angularVelocityMagnitude * sin(vectorChain[i].angle + vectorChain[i].angularVelocity));
@@ -83,6 +83,8 @@ void VectorChain::removeVector() {
 
 void VectorChain::changeDirection(float dir) {
 	vectorChain[selected].angle += dir;
+	if(vectorChain[selected].angle > 2 * M_PI) vectorChain[selected].angle -= 2 * M_PI;
+	if(vectorChain[selected].angle < 0) vectorChain[selected].angle += 2 * M_PI;
 }
 
 void VectorChain::changeAngularVelocity(float vel) {
