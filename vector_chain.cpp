@@ -54,6 +54,11 @@ void VectorChain::update(SDL_Renderer *renderer, float frameTime, uint8_t pathBu
 
 		for(size_t i = 0; i < vectorChain.size(); i++) {
 			if(selected == i) {
+				float angularVelocityMagnitude = abs(vectorChain[i].angle - vectorChain[i].angularVelocity) * 5;
+				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0);
+				SDL_RenderDrawLine(renderer, x, y, x + angularVelocityMagnitude * cos(vectorChain[i].angle + vectorChain[i].angularVelocity),
+					y + angularVelocityMagnitude * sin(vectorChain[i].angle + vectorChain[i].angularVelocity));
+			
 				vectorChain[i].draw(renderer, x, y, 0, 255, 0, 0);
 			} else {
 				vectorChain[i].draw(renderer, x, y, 0, 0, 255, 0);

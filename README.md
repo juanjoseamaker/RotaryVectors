@@ -9,7 +9,7 @@ Rotating vectors is a program that allows to create chains of vectors of differe
 * Space - select next vector
 * C - create new vector
 * D - delete vector
-* V and B - change angular velocity
+* V and B - change angular velocity (blue vector represents the angular velocity of the selected vector)
 
 ## TODO:
 
