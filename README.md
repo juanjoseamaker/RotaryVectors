@@ -16,3 +16,5 @@ Rotating vectors is a program that allows to create chains of vectors of differe
 * Set angles to exact phi values
 * Display angular velocity angle
 * Save and load progress to files
+
+Note: commits have wrong dates because my computer had wrong time
